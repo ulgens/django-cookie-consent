@@ -37,7 +37,7 @@ class CleanCookiesMiddlewareTests(TestCase):
             consent_response = self.client.post(
                 endpoint,
                 follow=True,
-                HTTP_X_REQUESTED_WITH="XMLHttpRequest",
+                headers={"x-requested-with": "XMLHttpRequest"},
             )
             self.assertEqual(consent_response.status_code, 200)
 
