@@ -76,7 +76,7 @@ class IntegrationTest(TestCase):
     def test_accept_cookie_ajax(self):
         response = self.client.post(
             reverse("cookie_consent_accept", kwargs={"varname": "optional"}),
-            HTTP_X_REQUESTED_WITH="XMLHttpRequest",
+            headers={"x-requested-with": "XMLHttpRequest"},
         )
         self.assertEqual(response.status_code, 200)
 
@@ -93,7 +93,7 @@ class IntegrationTest(TestCase):
     def test_decline_cookie_ajax(self):
         response = self.client.delete(
             reverse("cookie_consent_decline", kwargs={"varname": "optional"}),
-            HTTP_X_REQUESTED_WITH="XMLHttpRequest",
+            headers={"x-requested-with": "XMLHttpRequest"},
         )
         self.assertEqual(response.status_code, 200)
 

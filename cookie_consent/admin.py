@@ -9,6 +9,7 @@ from .conf import settings
 from .models import Cookie, CookieGroup, LogItem
 
 
+@admin.register(Cookie)
 class CookieAdmin(admin.ModelAdmin):
     list_display = ("varname", "name", "cookiegroup", "path", "domain", "get_version")
     search_fields = ("name", "domain", "cookiegroup__varname", "cookiegroup__name")
@@ -16,6 +17,7 @@ class CookieAdmin(admin.ModelAdmin):
     list_filter = ("cookiegroup",)
 
 
+@admin.register(CookieGroup)
 class CookieGroupAdmin(admin.ModelAdmin):
     list_display = (
         "varname",
@@ -58,7 +60,5 @@ class LogItemAdmin(admin.ModelAdmin):
     date_hierarchy = "created"
 
 
-admin.site.register(Cookie, CookieAdmin)
-admin.site.register(CookieGroup, CookieGroupAdmin)
 if settings.COOKIE_CONSENT_LOG_ENABLED:
     admin.site.register(LogItem, LogItemAdmin)
